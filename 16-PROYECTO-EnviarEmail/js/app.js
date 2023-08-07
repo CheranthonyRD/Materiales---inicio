@@ -1,73 +1,139 @@
-// cargar primero todo el contenido
-
 document.addEventListener('DOMContentLoaded', ()=>{
+    const email = document.querySelector("#email");
+    const asunto = document.querySelector("#asunto");
+    const mensaje = document.querySelector("#mensaje");
+    const submit = document.querySelector('button[type=submit]');
+    const reset = document.querySelector('button[type=reset]');
+    const formulario = document.querySelector('#formulario');
+    const spinner = document.querySelector('#spinner');
+    const success = document.querySelector('#success');
 
-    //seleccionar los input del formulario
-    const inputEmail = document.querySelector('#email');
-    const inputAsunto = document.querySelector('#asunto');
-    const inputMensaje = document.querySelector('#mensaje');
+    const object = {
+        email: '',
+        asunto: '',
+        mensaje: ''
+    }
 
-    //asignar los eventos
-    //blur: se ejecuta cuando sales del input o campo
-    //input: se ejecuta cuando estas escribiendo
-
-    inputEmail.addEventListener('blur', validar);
-    inputAsunto.addEventListener('blur', validar);
-    inputMensaje.addEventListener('blur', validar);
+    email.addEventListener("input", validar);
+    asunto.addEventListener("input", validar);
+    mensaje.addEventListener("input", validar);
+    reset.addEventListener("click", e =>{
+        e.preventDefault();
+        resetObject();
+        formulario.reset();
+        validate();
+    });
+    formulario.addEventListener('submit', enviar);
+    
+    // reset.addEventListener("click", reset);
 
     //funciones
-   function validar(evt){
-        const value = evt.target.value;
-        if(value.trim() === ''){
-            mostrarAlerta(evt.target, `El campo ${evt.target.id} es obligatorio`);
-            return;
-        }
+    function validar(evt){
+        const target = evt.target;
+        const value = target.value.trim();
 
-        if(evt.target.id === 'email' && !validarEmail(evt.target.value) ){
-            mostrarAlerta(evt.target, `El campo ${evt.target.id} no es valido`);
+        if(!validateIfEmpty(value)){
+            const message = `El campo ${target.id} es obligatorio`;
+            showAlert(target, message);
+            object[target.name] = '';
+            validate();            
             return;
-        }
-
+        }        
         
-        limpiarAlerta(evt.target);
+        if( target.id === 'email' && !validateEmail(value)){
+            showAlert(target, `El campo ${target.id} no es valido`);
+            object[target.name] = '';
+            validate();            
+            return;
+        }
 
-   }
+        cleanAlert(target);
+        object[target.name] = target.value.trim().toLowerCase();        
+        validate();
+    }
 
-   //funcion para mostrar alerta de error vacio
-   function mostrarAlerta(evt, mensaje){
 
-    
-   //limpiar la alerta
-   limpiarAlerta(evt);
-    
-    const alerta = document.createElement('P');
-    const elementoPadre = evt.parentElement;
-    alerta.classList.add('bg-red-600', 'text-white', 'p-2', 'text-center', 'error');
-    alerta.textContent = mensaje;
+    function validateIfEmpty(value){
+        let isEmpty = false;
+        if(value !== ""){
+            isEmpty = true;
+        }
+        return isEmpty;
+    }
 
-    elementoPadre.appendChild(alerta);
-   }
+    function showAlert(target, message){
+        // comprobar si existe ya una alerta
+        const alerta = target.parentElement.querySelector(".error");
+        if(alerta){
+            alerta.remove();
+        }
+        const sibling = target.previousElementSibling;
+        const error = document.createElement("P");
+        error.textContent = message;
+        error.classList.add("error");
+        sibling.appendChild(error);        
+    }
 
-   
-   function limpiarAlerta(evt){
-        const error = evt.parentElement.querySelector('.error');
+    function cleanAlert(target){
+        const error = target.parentElement.querySelector('.error');
         if(error){
             error.remove();
         }
-   }
+    }
 
-   function validarEmail(value){
+    function validateEmail(value){
+        const email = value;
+        const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
-    const regex =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/ ;
-    return regex.test(value);
-   }
+        return regex.test(email);
+    }
 
-   function habilitarEnviar(){
-    // const btnEnviar = document.querySelector('button');
+    function validate(){
+        const value = Object.values(object).includes('');
 
-    // if(btnEnviar.type === 'submit'){
-    //     btnEnviar.classList.remove(['opacity-50']);
-    //     btnEnviar.disabled = false;
-    // }
-   }
+        if(!value){
+            submit.classList.remove('opacity-50');
+            submit.removeAttribute("disabled");            
+            return;
+        }
+
+        submit.classList.add('opacity-50');
+        submit.setAttribute("disabled", "");
+    }
+
+    function resetObject(){
+        object.asunto = '';
+        object.email = '';
+        object.mensaje = '';
+    }
+
+    function enviar(evt){
+        evt.preventDefault();
+
+        spinner.classList.add("flex");
+        spinner.classList.remove("hidden");
+
+        setTimeout(()=>{
+            spinner.classList.remove("flex");
+            spinner.classList.add("hidden");
+            resetObject();
+            formulario.reset();
+            validate();
+        }, 3000)
+
+        setTimeout(()=>{
+            done();
+        }, 3000);
+    }
+
+    function done(){
+        success.classList.remove("hidden");
+
+        setTimeout(()=>{
+            success.classList.add("hidden");
+
+        }, 2000);
+    }
+
+
 });
