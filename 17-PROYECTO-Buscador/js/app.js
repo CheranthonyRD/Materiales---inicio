@@ -77,7 +77,7 @@ function generateYears(){
 
 function filterForBrand(e){
     busqueda.brand = e.target.value;
-    console.log(busqueda);   
+    filterCar();  
 }
 
 function filterForYear(e){
@@ -107,4 +107,15 @@ function filterForColor(e){
 
 function selection(element){
     return document.querySelector(element);
+}
+
+
+function filterCar(){
+    const filter = autos.filter(car=>{
+        if(busqueda.brand){
+            return car.marca === busqueda.brand
+        }
+        return car;
+    });    
+    return filter;
 }

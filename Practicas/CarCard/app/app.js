@@ -1,9 +1,8 @@
 const img = document.querySelector(".card__img");
 const buttons = document.querySelector(".buttons");
-const red = document.querySelector(".red");
-const black = document.querySelector(".black");
-const white = document.querySelector(".white");
 const label = document.querySelector(".label");
+const title = document.querySelector("title");
+
 const colors = {
     red: "./assets/imgs/roja.avif",
     black: "./assets/imgs/negra.webp",

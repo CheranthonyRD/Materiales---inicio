@@ -19,6 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 50px;
 }
 
 .card-container{
@@ -114,12 +115,13 @@
 }
 
 .add{
+    width: 100%;
     margin-top: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
-    padding: 10px 30px;
+    padding: 10px 0;
     border: none;
     border-radius: 8px;
     font-size: 20px;
@@ -127,6 +129,11 @@
     font-weight: 700;
     background-color: #fff;
     cursor: pointer;    
+}
+
+.add:hover{
+    background-color: #01c746;
+    color: #fff;
 }
 
 .add img{
