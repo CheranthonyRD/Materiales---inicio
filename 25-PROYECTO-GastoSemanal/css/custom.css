@@ -36,3 +36,13 @@ h2 {
     font-size: 22px;
     margin-bottom:30px;
 }
+
+.error{
+    background-color: brown;
+    color: #fff;
+    padding: 10px 0;
+    width: 100%;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+}
