@@ -12,7 +12,10 @@ export async function loadImages(){
 }
 
 function paintImages(images){
-    images.forEach( image =>{
+    
+    const filter = images.filter( image => image.width > 2500 );
+
+    filter.forEach( image =>{
         const {author, download_url} = image;
         const card = document.createElement("img");        
         card.className = "card";
