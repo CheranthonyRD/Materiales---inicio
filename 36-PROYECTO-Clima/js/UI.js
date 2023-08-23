@@ -1,4 +1,4 @@
-
+import { Spinner } from "./Spinner.js";
 
 export class UI{
 
@@ -44,7 +44,10 @@ export class UI{
                          <p class = "text-center text-sm">Max: ${max} &#8451</p>
                          <p class = "text-center text-sm">Min: ${min} &#8451</p>`
 
-        contenido.appendChild(div);
+        Spinner.activateSpinner(2000);
+        setTimeout(()=>{
+            contenido.appendChild(div);
+        }, 2000)
 
     }
 

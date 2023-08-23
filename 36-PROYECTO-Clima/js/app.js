@@ -2,6 +2,7 @@
 import {Clima} from "./Clima.js";
 import {UI} from "./UI.js";
 
+
 //variables y selectores
 const formulario = document.querySelector("#formulario");
 const ciudad = document.querySelector("#ciudad");
