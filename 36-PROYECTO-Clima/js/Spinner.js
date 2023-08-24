@@ -4,11 +4,14 @@
 
 export class Spinner {
     static activateSpinner(time){
-        const spinner = document.querySelector("#spinner");
-        spinner.classList.remove("hidden");
+       const spinner = document.querySelector("#spinner");
 
-        setTimeout(()=>{
-            spinner.classList.add("hidden");
-        },time);
+       if(spinner){
+            spinner.classList.remove("hidden");
+
+            setTimeout(()=>{
+                spinner.classList.add("hidden");
+            },time);
+        }
     }
 }
