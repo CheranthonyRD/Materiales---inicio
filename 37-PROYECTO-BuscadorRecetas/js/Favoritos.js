@@ -49,4 +49,10 @@ export class Favorito{
             return;
         }
     }
+
+    //comprobar que existe un favorito
+    verifyIfExistsFavoritte(id){
+        const favorites = this.getFavoritos() ?? [];
+        return favorites.some(f=> f.idMeal === id);
+    }
 }

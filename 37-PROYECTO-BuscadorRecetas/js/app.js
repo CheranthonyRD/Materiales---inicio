@@ -38,8 +38,15 @@ function filterForCategories(e){
 }
 
 function addToFavorite(e){
-    const receta = new Receta();    
     const idMeal = e.target.dataset.id;
+    
+    const receta = new Receta();    
+    
+
+    if(favorito.verifyIfExistsFavoritte(idMeal)){
+        
+        return;
+    }
 
     const filter = receta.filterForId(idMeal).then(r=> {
         const {idMeal, strCategory, strInstructions, strMealThumb, strMeal  } = r.meals[0];
@@ -52,8 +59,10 @@ function addToFavorite(e){
             strMeal
         }
 
-        favorito.setFavorito(fav);        
-    });    
+        favorito.setFavorito(fav);      
+    });
+
+    
 }
 
 // function paintFavorites(){

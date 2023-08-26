@@ -1,6 +1,6 @@
 //imports
 import { Receta } from "./Receta.js";
-
+import { Favorito } from "./Favoritos.js";
 
 //class
 export class UI{
@@ -114,7 +114,11 @@ export class UI{
             // <img class="card-img-top w-100" src=${strMealThumb} alt="Card image cap">`;
 
             cardButton.onclick = (e)=>{
-                const id = e.target.dataset.id;
+                const id = e.target.dataset.id;  
+                const favorito = new Favorito();
+                const btnFav = document.querySelector("#btnFav");
+                btnFav.textContent = (favorito.verifyIfExistsFavoritte(id) ? "Eliminar Favorito" : "Guardar Favorito");
+                              
                 this.filterForId(id);
             }
             resultado.appendChild(card);
