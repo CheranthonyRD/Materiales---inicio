@@ -2,6 +2,7 @@
 //
 
 export class Favorito{
+
     constructor(){
         this.favoritos = [];
     }
@@ -24,5 +25,28 @@ export class Favorito{
         this.favoritos.push(fav);
 
         localStorage.setItem("favoritos", JSON.stringify(this.favoritos))
+    }
+
+
+    //borrar todos los favoritos
+    borrarFavoritos(){
+        const favoritos = this.getFavoritos();
+
+        if(favoritos !== null){
+            localStorage.removeItem("favoritos");
+            return;
+        }
+    }
+
+    //borrar 1 favorito por el id
+    deleteFavoriteForId(id){
+        const favorites = this.getFavoritos();
+
+        if(favorites.length > 0){
+            const favorite = favorites.filter( f => f.idMeal !== id);
+            localStorage.setItem("favoritos", JSON.stringify(favorite));
+            location.reload();
+            return;
+        }
     }
 }
