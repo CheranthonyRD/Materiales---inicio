@@ -9,9 +9,11 @@ h1 {
     color: white;
     text-align: left;
     font-weight: 700;
-    font-size: 50px;
+    font-size: 30px;
     margin-bottom: 50px;
     margin-top: 80px;
+    text-align: center;
+    position: relative;
 }
 h1::after {
     content: '';
@@ -19,6 +21,9 @@ h1::after {
     height:6px;
     background-color: #66a2fe;
     display: block;
+    position: absolute;
+    left: 60px;
+    
 }
 .container img {
     margin-top: 150px;
