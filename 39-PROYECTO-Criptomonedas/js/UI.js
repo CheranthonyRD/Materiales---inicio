@@ -48,11 +48,15 @@ export class UI{
 
         const p2 = document.createElement("P");
         p2.textContent = `Mas bajo del dia: ${LOWDAY}`;
+
+        this.spinner(parent);
         
-        parent.appendChild(title);
-        parent.appendChild(p);  
-        parent.appendChild(p1);  
-        parent.appendChild(p2);    
+        setTimeout(()=>{
+            parent.appendChild(title);
+            parent.appendChild(p);  
+            parent.appendChild(p1);  
+            parent.appendChild(p2);  
+        }, 2500);  
         
     }
 
@@ -61,6 +65,21 @@ export class UI{
             element.removeChild(element.firstChild);
         }
     }
-
     
+    static spinner(parent){
+        this.cleanHTML(parent);
+        const spinner = document.createElement("DIV");
+        const div = document.createElement("DIV");
+
+        //asignar clases y valores
+        spinner.className = `spinner`;
+
+        spinner.appendChild(div);
+
+        parent.appendChild(spinner);
+
+        setTimeout(()=>{
+            spinner.remove();
+        }, 2500);
+    }
 }
